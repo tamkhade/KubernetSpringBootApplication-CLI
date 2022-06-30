@@ -1,0 +1,61 @@
+1.To Resolve Build Issue we need to add jdk file path into the build congfig file so build will not fail
+
+1.1: start the minicube using below command
+     minikube start --driver=docker
+1.2: check the status
+     minikube status
+     
+1.3:  To check the cluster information
+      kubectl cluster-info
+
+1.4:  To check the node
+      kubectl get node   
+
+1.5: To run the docker Enviroment
+      minikube docker-env
+    
+1.7: Need to set the env token
+      @FOR /f "tokens=*" %i IN ('minikube -p minikube docker-env --shell cmd') DO @%i
+      
+1.8: Need to check the images 
+     docker images
+     
+ 1.9: Need to create the image so we need to change the path  
+      directory path
+ 
+ 2.0 : Need to build the springboot docker file
+       docker build -t springboot-k8s-demo:1.0 .    
+    
+2.1  Need to check the image is created or not                    
+      docker images
+      
+2.2   We need to run the particular image inside the POD so for that we need to create deployment object. We can decalare the deployment 
+     object details into the YML file OR we can directly use the command prompt
+     
+     kubectl create deployment spring-boot-k8s --image=springboot-k8s-demo:1.0 --port=8080     
+     
+     o/p - deployment.apps/spring-boot-k8s created
+     
+ 2.3 We need to check the deployment object is created or not 
+     kubectl get deployment    
+  
+ 2.4 For decription of deployment we need to check 
+     kubectl describe deployment spring-boot-k8s
+     
+ 2.5 To check the status of the POD
+     kubectl get pods  
+     
+ 2.6 To check the log of particular POD
+     kubectl logs spring-boot-k8s-8689dc9df5-mlwdr(Name of POD)
+     
+ 2.7 To access the URL we have to create the service URL so we can access our URL
+     kubectl expose deployment spring-boot-k8s --type=NodePort(Serice Type)
+ 
+ 2.8 To see the service 
+     kubectl get service     
+     
+ 2.9 To check the service URL 
+     minikube service spring-boot-k8s --url             
+     
+ 3.0 To check kubernet dashbord
+    minikube dashboard    
