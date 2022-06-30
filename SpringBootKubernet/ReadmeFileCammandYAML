@@ -1,0 +1,9 @@
+
+1.1 To create the deployment  we need to use the following commnad
+	kubectl apply -f k8s-deployment.yaml
+
+1.2 To create the service we need to use the following command
+ 	kubectl apply -f k8s-service.yaml
+
+1.3 To access the end URL access
+	kubectl get nodes -o wide 	
